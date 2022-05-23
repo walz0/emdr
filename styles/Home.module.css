@@ -21,7 +21,7 @@
 .disclaimer {
   width: 20vw;
   text-align: left;
-  text-indent: 20px;
+  /* text-indent: 20px; */
   line-height: 1.75;
 }
 

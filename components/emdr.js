@@ -93,12 +93,14 @@ function Emdr() {
     }
 
     function resizeWindow(canvas) {
+        if (!canvas) return;
         canvas.width = x;
         canvas.height = y;
     }
 
     function render() {
         const canvas = canvasRef.current;
+        if (!canvas) return;
         // adjust canvas height to window size
         resizeWindow(canvas);
         const ctx = canvas.getContext('2d');
