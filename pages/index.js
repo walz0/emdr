@@ -17,7 +17,7 @@ export default function Home() {
             emdr
           </div>
           <div className={styles.disclaimer}>
-            This project is not meant to replace trained professionals conducting EMDR.
+            This project is not meant to replace a trained professional conducting EMDR.
             Performing things under the umbrella of EMDR such as brainspotting on yourself
             may result in adverse effects. Please proceed with caution.
           </div>
