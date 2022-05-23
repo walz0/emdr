@@ -1,0 +1,33 @@
+.container {
+  margin-top: 5vw;
+}
+
+.main {
+  color: #fff;
+  text-align: center;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.title {
+  color: #fff;
+  font-size: 4em;
+  width: 100%;
+}
+
+.disclaimer {
+  width: 20vw;
+  text-align: left;
+  text-indent: 20px;
+  line-height: 1.75;
+}
+
+@media (max-width: 600px) {
+  .grid {
+    width: 100%;
+    flex-direction: column;
+  }
+}
