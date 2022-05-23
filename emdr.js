@@ -23,7 +23,7 @@ let start = 0;
 // bilateral stimulation toggle
 let bls = false;
 // duration of bls
-let blsDuration = 20 * 1000;
+let blsDuration = 40 * 1000;
 
 function drawCircle(ctx, x, y, radius) {
     ctx.beginPath();
@@ -104,7 +104,7 @@ function advanceText() {
     }
     // begin bilateral stimulation
     else {
-        start = 0;
+        start = time;
         bls = true;
     }
 }
@@ -134,7 +134,8 @@ function render() {
             }
             else {
                 currentText = lines[0];
-                time = 0;
+                start = time;
+                fade = -1;
                 bls = false;
             }
         }
