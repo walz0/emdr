@@ -7,13 +7,13 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>emdr</title>
+        <title>emdr - demo</title>
         <meta name="description" content="A project meant to aid in eye movement desensitization and reprocessing" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>
-          <Emdr width={"1920"} height={"1080"} />
+          <Emdr />
       </main>
     </div>
   )

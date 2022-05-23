@@ -25,6 +25,22 @@
   line-height: 1.75;
 }
 
+.button {
+  margin: 1em;
+  padding: 0.5em 2em 0.5em 2em;
+  outline: none;
+  font-weight: bolder;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.button:hover {
+  background: #e5e5e5;
+  border-radius: 0px;
+  transition: 0.25s;
+}
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;

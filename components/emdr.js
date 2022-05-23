@@ -1,13 +1,13 @@
 import React, { useRef, useEffect, useState } from 'react';
 
-function Emdr({width, height}) {
+function Emdr() {
     const canvasRef = useRef(null);
 
     const refreshRate = 5; // call rate of render func in milliseconds
     const blsDuration = 40 * 1000; // length of bls in milliseconds
+    const textFadeDuration = 500; // length of text fade in milliseconds
     let x = 0; // width of the window
     let y = 0; // height of the window
-    let time = 0; // total elapsed time in milliseconds
     let bls = false; // bilateral stimulation toggle
     let start = 0; // general purpose pointer for starting timers
     // emdr routine text
@@ -37,17 +37,17 @@ function Emdr({width, height}) {
         // if text is fading
         if (fade !== 0) {
             // time elapsed since fade began
-            let elapsed = time - start;
-            if (elapsed < 1000) {
+            let elapsed = Date.now() - start;
+            if (elapsed < textFadeDuration) {
                 let total = fade ? fade == 1 : 0;
-                ctx.strokeStyle = "rgb(255, 255, 255, " + (total - (elapsed / 1000) * fade).toString() + ")";
+                ctx.strokeStyle = "rgb(255, 255, 255, " + (total - (elapsed / textFadeDuration) * fade).toString() + ")";
             }
             else {
                 if (fade == 1) {
                     // advance dialogue
                     advanceText();
                     // set to fade in new text
-                    start = time;
+                    start = Date.now();
                     fade = -1;
                 }
                 else if (fade == -1) {
@@ -77,19 +77,17 @@ function Emdr({width, height}) {
         var index = lines.indexOf(currentText);
         // if the user has not reached the end of the dialogue
         if (index != lines.length - 1) {
-
             currentText = lines[index + 1];
         }
         // begin bilateral stimulation
         else {
-            start = time;
+            start = Date.now();
             bls = true;
-            console.log(bls);
         }
     }
 
     function fadeOut() {
-        start = time;
+        start = Date.now();
         // fade out current text
         fade = 1;
     }
@@ -102,18 +100,18 @@ function Emdr({width, height}) {
     function render() {
         const canvas = canvasRef.current;
         // adjust canvas height to window size
-        // resizeWindow(canvas);
+        resizeWindow(canvas);
         const ctx = canvas.getContext('2d');
         // clear canvas before frame draw
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         if (bls) {
-            let elapsed = time - start;
+            let elapsed = Date.now() - start;
             if (elapsed < blsDuration) {
-                drawCircle(ctx, (x / 2) + (Math.sin(time / 550) * ((x / 2) / 2)), (y / 2), 75);
+                drawCircle(ctx, (x / 2) + (Math.sin(Date.now() / 250) * ((x / 2) / 2)), (y / 2), 75);
             }
             else {
                 currentText = lines[0];
-                start = time;
+                start = Date.now();
                 fade = -1;
                 bls = false;
             }
@@ -121,7 +119,6 @@ function Emdr({width, height}) {
         else {
             drawText(ctx, x / 2, y / 2, currentText);
         }
-        time += refreshRate;
     }
 
     function setWindowDimensions() {
@@ -156,7 +153,7 @@ function Emdr({width, height}) {
 
     return (
         <div>
-            <canvas ref={canvasRef} width={width} height={height}></canvas>
+            <canvas ref={canvasRef}></canvas>
         </div>
     )
 }
